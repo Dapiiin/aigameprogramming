@@ -5,9 +5,11 @@ using UnityEngine;
 public class ChaseState : BaseState
 {
     public void EnterState(Enemy enemy)
-        {
-            Debug.Log("Start Chasing");
-        }
+    {
+        Debug.Log("Start Chasing");
+        // PERBAIKAN: Pastikan Trigger sesuai dengan nama di Animator
+        enemy.Animator.SetTrigger("ChaseState"); 
+    }
 
     public void UpdateState(Enemy enemy)
     {
@@ -15,6 +17,7 @@ public class ChaseState : BaseState
         {
             enemy.NavMeshAgent.destination = enemy.Player.transform.position;
 
+            // Jika player terlalu jauh, balik patroli
             if (Vector3.Distance(enemy.transform.position, enemy.Player.transform.position) > enemy.ChaseDistance)
             {
                 enemy.SwitchState(enemy.PatrolState);
@@ -22,8 +25,5 @@ public class ChaseState : BaseState
         }
     }
 
-    public void ExitState(Enemy enemy)
-    {
-        Debug.Log("Stop Chasing");
-    }
+    public void ExitState(Enemy enemy) => Debug.Log("Stop Chasing");
 }

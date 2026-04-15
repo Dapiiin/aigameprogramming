@@ -21,25 +21,18 @@ public class Player : MonoBehaviour
 
     public void PickPowerUp()
     {
-        if (_powerupCoroutine != null)
-        {
-        StopCoroutine(_powerupCoroutine);
-        }
-
-        _powerupCoroutine = StartCoroutine (StartPowerUp());
+        Debug.Log("1. Player: Fungsi PickPowerUp terpanggil!"); 
+        if (_powerupCoroutine != null) StopCoroutine(_powerupCoroutine);
+        _powerupCoroutine = StartCoroutine(StartPowerUp());
     }
 
     private IEnumerator StartPowerUp()
     {
-        if (OnPowerUpStart != null)
-        {
-            OnPowerUpStart();
-        }
+        Debug.Log("2. Player: Mengirim sinyal OnPowerUpStart...");
+        OnPowerUpStart?.Invoke(); 
         yield return new WaitForSeconds(_powerupDuration);
-        if (OnPowerUpStop != null)
-        {
-            OnPowerUpStop();
-        }
+        Debug.Log("3. Player: Mengirim sinyal OnPowerUpStop...");
+        OnPowerUpStop?.Invoke();
     }
 
     private void Awake()
