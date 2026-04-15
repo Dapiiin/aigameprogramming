@@ -12,7 +12,6 @@ public class Pickable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Pickup: " + PickableType);
             OnPicked(this);
             Destroy(gameObject);
         }
