@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
         _currentState.EnterState(this);
     }
     
+    public void Dead()
+    {
+        Destroy(gameObject);
+    }
+
     private void Awake()
     {
         NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -51,4 +56,15 @@ public class Enemy : MonoBehaviour
 
     private void StartRetreating() => SwitchState(RetreatState);
     private void StopRetreating() => SwitchState(PatrolState);
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_currentState != RetreatState)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                collision.gameObject.GetComponent<Player>().Dead();
+            }
+        }
+    }
 }
