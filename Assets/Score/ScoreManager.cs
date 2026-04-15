@@ -28,11 +28,14 @@ public class ScoreManager : MonoBehaviour
         UpdateUI();
     }
 
-    // Unity Message | 0 references
-    private void Start()
+    private void Awake()
     {
         _score = 0;
         _maxScore = 0;
+    }
+
+    private void Start()
+    {
         UpdateUI();
     }
 }
